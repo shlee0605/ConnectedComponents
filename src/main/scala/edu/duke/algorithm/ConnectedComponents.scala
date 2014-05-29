@@ -1,6 +1,8 @@
 package edu.duke.algorithm
 
 import scala.collection.mutable.ArrayBuffer
+import scala.collection.mutable.ListBuffer
+
 // Spark
 import org.apache.spark.SparkContext
 import org.apache.spark.rdd._
@@ -22,16 +24,18 @@ object ConnectedComponents {
     var result: RDD[(Int, Seq[Int])] = graph.map(v => (v._1, (v._2 :+ v._1)))
     result.saveAsTextFile(output+"_initial")
 
-    //map
-
+    //run the algorithm
     for(i <- 1 to iter) {
+      //map phase
       val intermediate: RDD[(Int, Seq[Int])] = result.flatMap(v => hash(v._1, v._2))
-      result = intermediate.reduceByKey(_.union(_).distinct)
+      //reduce phase
+      result = intermediate.reduceByKey(_.union(_)).map(v => (v._1, v._2.distinct))
       result.saveAsTextFile(output+"_" + i)
     }
 
-    val finalResult = result.filter(v => export(v._1, v._2))
-    finalResult.saveAsTextFile(output+"_final")
+    //find the connected components
+    val connectedComponents = result.filter(v => export(v._1, v._2)).map(v => (v._1, v._2.sortWith(_ < _)))
+    connectedComponents.saveAsTextFile(output+"_final")
   }
 
   private def hash(vertex: Int, neighbors:Seq[Int]): Seq[(Int, Seq[Int])] = {
@@ -51,6 +55,7 @@ object ConnectedComponents {
     result
   }
 
+  //filtering out if v_min of the cluster != v
   private def export(vertex: Int, neighbors:Seq[Int]): Boolean = {
     val min = neighbors.min
     if(min == vertex) {
@@ -60,5 +65,4 @@ object ConnectedComponents {
       return false
     }
   }
-
 }

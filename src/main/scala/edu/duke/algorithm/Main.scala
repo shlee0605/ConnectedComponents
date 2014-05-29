@@ -8,9 +8,9 @@ import SparkContext._
 object Main {
 
   private val master = "local"
-  private val input = "input/test.txt"
+  private val input = "input/kronecker_graph_10.txt"
   private val output = "output"
-  private val iter = 4
+  private val iter = 5
   private val jar = "target/scala-2.10/spark-example-assembly-0.1.0.jar"
   private val AppName = "ConnectedComponents"
 
