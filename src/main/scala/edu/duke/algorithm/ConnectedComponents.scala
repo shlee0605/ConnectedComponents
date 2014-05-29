@@ -1,10 +1,10 @@
-package spark.example
+package edu.duke.algorithm
 
 // Spark
 import org.apache.spark.SparkContext
 import SparkContext._
 
-object WordCount {
+object ConnectedComponents {
 
   // Run the word count. Agnostic to Spark's current mode of operation: can be run from tests as well as from main
   def execute(sc: SparkContext, input: String, output:String) {
