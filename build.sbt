@@ -4,7 +4,7 @@ assemblySettings
 
 excludedJars in assembly <<= (fullClasspath in assembly)
 
-name := "spark-example"
+name := "connected-components"
 
 version := "0.1.0"
 

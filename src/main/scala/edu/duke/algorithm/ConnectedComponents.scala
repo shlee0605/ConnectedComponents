@@ -20,9 +20,14 @@ object ConnectedComponents {
       Seq((nodes(0).toInt, nodes(1).toInt),(nodes(1).toInt, nodes(0).toInt))
     }.distinct().groupByKey()
 
+    // val graph = file.map{
+    //   s => val nodes = s.split("\\s+")
+    //   (nodes(0).toInt, nodes(1).toInt)
+    // }.distinct().groupByKey()
+
     //initialize C_v
     var result: RDD[(Int, Seq[Int])] = graph.map(v => (v._1, (v._2 :+ v._1)))
-    result.saveAsTextFile(output+"_initial")
+    result.saveAsTextFile(output+"/initial")
 
     //run the algorithm
     for(i <- 1 to iter) {
@@ -30,12 +35,12 @@ object ConnectedComponents {
       val intermediate: RDD[(Int, Seq[Int])] = result.flatMap(v => hash(v._1, v._2))
       //reduce phase
       result = intermediate.reduceByKey(_.union(_)).map(v => (v._1, v._2.distinct))
-      result.saveAsTextFile(output+"_" + i)
+      result.saveAsTextFile(output+"/round_" + i)
     }
 
     //find the connected components
     val connectedComponents = result.filter(v => export(v._1, v._2)).map(v => (v._1, v._2.sortWith(_ < _)))
-    connectedComponents.saveAsTextFile(output+"_final")
+    connectedComponents.saveAsTextFile(output+"/final")
   }
 
   private def hash(vertex: Int, neighbors:Seq[Int]): Seq[(Int, Seq[Int])] = {
@@ -65,4 +70,5 @@ object ConnectedComponents {
       return false
     }
   }
+  
 }
