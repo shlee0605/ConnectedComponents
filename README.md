@@ -1,4 +1,4 @@
-Spark Standalone Program Example
+Connected Components
 ====================
 
 In order to create the eclipse project, run the following command:
