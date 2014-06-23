@@ -1,6 +1,6 @@
 Connected Components
 ====================
-This is an implementation of 'Hash-To-Min' algorithm that finds out the connected components in a graph. The detail of algorithm can be found at the following paper:
+This is an implementation of 'Hash-To-Min' algorithm that finds out the connected components of a graph. The detail of algorithm can be found at the following paper:
 
 [Finding Connected Components in Map-Reduce in Logarithmic Rounds](http://arxiv.org/pdf/1203.5387.pdf)
 

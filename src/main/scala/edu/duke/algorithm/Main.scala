@@ -20,8 +20,8 @@ object Main {
     val appName = "ConnectedComponents"
 
     val conf = new SparkConf().setAppName(appName).setMaster(master)
-    conf.set("spark.eventLog.enabled", "true")
-    conf.set("spark.eventLog.dir", "file:///home/shlee0605/event")
+    //conf.set("spark.eventLog.enabled", "true")
+    //conf.set("spark.eventLog.dir", "file:///home/shlee0605/snap/connected/event")
     conf.setJars(Seq("target/scala-2.10/connected-components-assembly-0.1.0.jar"))
 
     // Run the word count

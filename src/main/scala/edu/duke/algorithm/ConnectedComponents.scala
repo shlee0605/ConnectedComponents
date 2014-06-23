@@ -30,8 +30,8 @@ object ConnectedComponents {
     var result: RDD[(Int, Set[Int])] = graph.map(v => {
       val cv: Set[Int] = v._2.toSet + v._1
       (v._1, cv)
-    }).sortByKey()
-    //})
+    //}).sortByKey()
+    })
     
     result.saveAsTextFile(output+"/initial")
     //run the algorithm
@@ -44,8 +44,8 @@ object ConnectedComponents {
       val intermediate: RDD[(Int, Set[Int])] = result.flatMap(v => hash(v._1, v._2))
 
       //reduce phase
-      result = intermediate.reduceByKey(_.union(_)).sortByKey()
-      //result = intermediate.reduceByKey(_.union(_))
+      //result = intermediate.reduceByKey(_.union(_)).sortByKey()
+      result = intermediate.reduceByKey(_.union(_))
 
       //save intermediate result
       result.saveAsTextFile(output+"/round_" + i)
