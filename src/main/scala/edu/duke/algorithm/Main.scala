@@ -2,7 +2,8 @@ package edu.duke.algorithm
 
 // Spark
 import org.apache.spark.SparkContext
-import SparkContext._
+import org.apache.spark.SparkContext._
+import org.apache.spark.SparkConf
 
 object Main {
   def main(args: Array[String]) {
@@ -16,11 +17,15 @@ object Main {
     val iteration = args(1).toInt
     val input = args(2)
     val output = args(3)
-    val AppName = "ConnectedComponents"
-    val jar = "target/scala-2.10/connected-components-assembly-0.1.0.jar"
+    val appName = "ConnectedComponents"
+
+    val conf = new SparkConf().setAppName(appName).setMaster(master)
+    conf.set("spark.eventLog.enabled", "true")
+    conf.set("spark.eventLog.dir", "file:///home/shlee0605/event")
+    conf.setJars(Seq("target/scala-2.10/connected-components-assembly-0.1.0.jar"))
 
     // Run the word count
-    val sc = new SparkContext(master, AppName, null, List(jar))
+    val sc = new SparkContext(conf)
     ConnectedComponents.execute(sc, input, output, iteration)
     // Exit with success
     System.exit(0)
