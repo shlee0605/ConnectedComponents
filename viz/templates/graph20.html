@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block head %}
+{{ super() }}
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<style>
+
+.node {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+.link {
+  fill: none;
+  stroke: #bbb;
+  stroke-opacity: 0.3;
+}
+</style>
+
+{% endblock %}
+{% block title %}Connected{% endblock %}
+
+
+{% block page_content %}
+
+<div class="page-header">
+    <h2>Hash-To-Min Algorithm Visualization</h2>
+</div>
+<div class="btn-group-lg">
+  <a href="/graph/18" class="btn btn-default">init</a>
+  <a href="/graph/19" class="btn btn-default">1</a>
+  <a href="/graph/20" class="btn btn-default">2</a>
+  <a href="/graph/21" class="btn btn-default">3</a>
+  <a href="/graph/22" class="btn btn-default">4</a>
+  <a href="/graph/23" class="btn btn-default">5</a>
+</div>
+<img src="{{ url_for('static', filename='pic/result_2.png') }}" alt="..." align="center">
+
+<div class="well">
+After iteration 2:<br>
+0 : [0, 4, 5, 8, 17, 23, 24, 30] <br>
+1 : [1, 2, 5, 7, 25, 29] <br>
+2 : [1, 2, 5, 7, 11, 12, 18, 19, 22, 25, 26] <br>
+3 : [3, 5, 9, 10, 13, 28] <br>
+4 : [0, 4, 5, 8, 9, 21] <br>
+5 : [0, 1, 2, 3, 4, 5, 6, 11, 13, 14, 17, 19, 24, 25] <br>
+6 : [5, 6, 11, 16, 18, 19] <br>
+7 : [1, 2] <br>
+8 : [0, 4, 8, 17, 21, 30] <br>
+9 : [3, 4, 9, 13, 20, 24, 27, 28] <br>
+10 : [3] <br>
+11 : [2, 5, 6, 11, 14, 15] <br>
+12 : [2] <br>
+13 : [3, 5, 9] <br>
+14 : [5, 11, 14, 15, 19, 22] <br>
+15 : [11, 14] <br>
+16 : [6] <br>
+17 : [0, 5, 8] <br>
+18 : [2, 6] <br>
+19 : [2, 5, 6, 14] <br>
+20 : [9] <br>
+21 : [4, 8] <br>
+22 : [2, 14] <br>
+23 : [0] <br>
+24 : [0, 5, 9] <br>
+25 : [1, 2, 5] <br>
+26 : [2] <br>
+27 : [9] <br>
+28 : [3, 9] <br>
+29 : [1] <br>
+30 : [0, 8] 
+
+</div>
+
+
+
+{% endblock %}
+
+
