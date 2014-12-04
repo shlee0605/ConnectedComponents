@@ -1,0 +1,1 @@
+{"nodes": [{"group": "0", "name": "0"}, {"group": "0", "name": "1"}, {"group": "2", "name": "2"}, {"group": "0", "name": "3"}, {"group": "2", "name": "4"}], "links": [{"source": 1, "target": 0, "value": 1}, {"source": 0, "target": 3, "value": 1}, {"source": 3, "target": 4, "value": 1}, {"source": 2, "target": 4, "value": 1}]}

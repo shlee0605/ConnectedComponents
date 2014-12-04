@@ -50,7 +50,7 @@ var svg = d3.select("#graph_plot").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-d3.json("{{ url_for('static', filename='data/2-1.json') }}", function(error, graph) {
+d3.json("{{ url_for('static', filename='data/test.json') }}", function(error, graph) {
   var nodes = graph.nodes.slice(),
       links = [],
       bilinks = [];
