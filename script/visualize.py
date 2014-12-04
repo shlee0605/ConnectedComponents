@@ -48,7 +48,6 @@ def parse(inputfile, resultfile, outputfile):
     # read in initial input graph and get the nodes, edges
     for line in file:
         data = line.split()
-        print data[0]
         data_0 = int(data[0])
         data_1 = int(data[1])
         if data_0 not in nodes:
@@ -67,6 +66,7 @@ def parse(inputfile, resultfile, outputfile):
             nodes_result.append({"name": str(node), "group": node})
     else:
         nodes_result = parse_round(resultfile)
+
     for link in links:
         links_result.append({"source": int(link[0]), "target":int(link[1]), "value" : 1})
 
@@ -82,7 +82,15 @@ def parse_round(input):
     nodes=[]
     for line in file:
         data = re.split(r'[(,)]', line)
-        nodes.append({"name": data[1], "group":data[3]})
+        node = data[1]
+        i = 3
+        cluster = []
+        while data[i] != "":
+            cluster.append(int(data[i].strip()))
+            i = i + 1
+        cluster = sorted(cluster)
+        nodes.append({"name": node, "group":str(cluster[0])})
+    nodes = sorted(nodes, key=lambda k: k['name'])
     return nodes
 
 if __name__ == '__main__':
